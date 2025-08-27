@@ -9,3 +9,13 @@ describe("GitHubSDK - constructor", () => {
     expect(gh.baseURL).toBe("https://api.github.com");
   });
 });
+
+describe("GitHubSDK - fetch repos data", () => {
+  test("get list of my repos", async () => {
+    const gh = new GitHubSDK("Neil-Gorski", "secret-token");
+    const myRepos = await gh.getListOfMyRepos();
+
+    expect(Array.isArray(myRepos)).toBe(true);
+    expect(myRepos.length).toBeGreaterThan(0);
+  });
+});
