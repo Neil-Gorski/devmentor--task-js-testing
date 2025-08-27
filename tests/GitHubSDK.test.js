@@ -12,11 +12,16 @@ describe("GitHubSDK - constructor", () => {
 });
 
 describe("GitHubSDK - fetch repos data", () => {
-  test("get list of my repos", async () => {
-    const gh = new GitHubSDK("Neil-Gorski", TOKEN);
-    const myRepos = await gh.getListOfMyRepos();
-
+  let gh;
+  let myRepos;
+  beforeAll(async () => {
+    gh = new GitHubSDK("Neil-Gorski", TOKEN);
+    myRepos = await gh.getListOfMyRepos();
+  });
+  test("returns an arry", async () => {
     expect(Array.isArray(myRepos)).toBe(true);
+  });
+  test("array is not empty", () => {
     expect(myRepos.length).toBeGreaterThan(0);
   });
 });

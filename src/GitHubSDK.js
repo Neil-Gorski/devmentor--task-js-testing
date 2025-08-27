@@ -16,7 +16,6 @@ export default class GitHubSDK {
     };
     const res = await fetch(url, fetchObj);
     const data = await res.json();
-    console.log(data);
     return data;
   }
 }
