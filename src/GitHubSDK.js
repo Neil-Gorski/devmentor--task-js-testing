@@ -43,10 +43,33 @@ export default class GitHubSDK {
     returnObj = {
       status: response.status,
       error:
-        response.status === 200
+        response.status === 201
           ? null
           : "Error: Repo with this name allready exists.",
       data: data,
+    };
+
+    return returnObj;
+  }
+  async deleteRepo(repoName) {
+    const url = `${this.baseURL}/repos/${this.owner}/${repoName}`;
+    const fetchObj = {
+      method: "DELETE",
+      headers: {
+        accept: "application/vnd.github+json",
+        Authorization: `Bearer ${this.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    };
+    const response = await fetch(url, fetchObj);
+    console.log(response);
+    returnObj = {
+      status: response.status,
+      error:
+        response.status === 204
+          ? null
+          : "Error: Can not delete non existing repo.",
+      data: null,
     };
 
     return returnObj;
