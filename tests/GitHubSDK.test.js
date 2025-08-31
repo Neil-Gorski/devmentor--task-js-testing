@@ -112,12 +112,12 @@ describe("GitHubSDK - CRUD repo", () => {
       })
     );
   });
-  // test("fails to find non existing repo", async () => {
-  //   const res = await gh.getRepo(payload.name + "unknown");
-  //   expect(res.status).toBe(404);
-  //   expect(res.error).toBe(`Error: Can not find non existing repo.`);
-  //   expect(res.data).toBe(null);
-  // });
+  test("fails to find non existing repo", async () => {
+    const res = await gh.getRepo(payload.name + "unknown");
+    expect(res.status).toBe(404);
+    expect(res.error).toBe(`Error: Can not find non existing repo.`);
+    expect(res.data).toBe(null);
+  });
   // test("update repo description", async () => {
   //   payload.description =
   //     "This repository serves as a testing environment for the GitHub REST API. It is used to test and verify the creation of repositories via API calls. Description has been updated.";

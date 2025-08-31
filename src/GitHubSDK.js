@@ -89,8 +89,11 @@ export default class GitHubSDK {
     const data = await response.json();
     const returnObj = {
       status: response.status,
-      error: response.status === 200 ? null : "Error: Can not find repo.",
-      data: data,
+      error:
+        response.status === 200
+          ? null
+          : "Error: Can not find non existing repo.",
+      data: response.status === 200 ? data : null,
     };
     return returnObj;
   }
