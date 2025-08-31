@@ -18,7 +18,7 @@ describe("GitHubSDK - fetch my repos data", () => {
     gh = new GitHubSDK("Neil-Gorski", TOKEN);
     repos = await gh.getListOfRepos();
   });
-  test("returns an arry", async () => {
+  test("returns an array", async () => {
     expect(Array.isArray(repos)).toBe(true);
   });
   test("array is not empty", () => {
