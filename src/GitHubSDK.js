@@ -15,11 +15,7 @@ export default class GitHubSDK {
     console.log(url);
     const fetchObj = {
       method: "GET",
-      headers: {
-        accept: "application/vnd.github+json",
-        Authorization: `Bearer ${this.token}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
+      headers: this.headers,
     };
     const response = await fetch(url, fetchObj);
     const data = await response.json();
@@ -30,12 +26,7 @@ export default class GitHubSDK {
     const url = `${this.baseURL}/user/repos`;
     const fetchObj = {
       method: "POST",
-      headers: {
-        accept: "application/vnd.github+json",
-        Authorization: `Bearer ${this.token}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify(payload),
     };
     const response = await fetch(url, fetchObj);
@@ -57,11 +48,7 @@ export default class GitHubSDK {
     const url = `${this.baseURL}/repos/${this.owner}/${repoName}`;
     const fetchObj = {
       method: "DELETE",
-      headers: {
-        accept: "application/vnd.github+json",
-        Authorization: `Bearer ${this.token}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
+      headers: this.headers,
     };
     const response = await fetch(url, fetchObj);
     console.log(response);
@@ -81,11 +68,7 @@ export default class GitHubSDK {
     const url = `${this.baseURL}/repos/${this.owner}/${repo}`;
     const fetchObj = {
       method: "GET",
-      headers: {
-        accept: "application/vnd.github+json",
-        Authorization: `Bearer ${this.token}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
+      headers: this.headers,
     };
     const response = await fetch(url, fetchObj);
     const data = await response.json();
@@ -104,11 +87,7 @@ export default class GitHubSDK {
     const url = `${this.baseURL}/repos/${this.owner}/${repo}`;
     const fetchObj = {
       method: "PATCH",
-      headers: {
-        accept: "application/vnd.github+json",
-        Authorization: `Bearer ${this.token}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-      },
+      headers: this.headers,
       body: JSON.stringify(payload),
     };
     const response = await fetch(url, fetchObj);
