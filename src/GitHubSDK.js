@@ -52,6 +52,7 @@ export default class GitHubSDK {
 
     return returnObj;
   }
+
   async deleteRepo(repoName) {
     const url = `${this.baseURL}/repos/${this.owner}/${repoName}`;
     const fetchObj = {
@@ -75,6 +76,7 @@ export default class GitHubSDK {
 
     return returnObj;
   }
+
   async getRepo(repo) {
     const url = `${this.baseURL}/repos/${this.owner}/${repo}`;
     const fetchObj = {
@@ -87,6 +89,30 @@ export default class GitHubSDK {
     };
     const response = await fetch(url, fetchObj);
     const data = await response.json();
+    const returnObj = {
+      status: response.status,
+      error:
+        response.status === 200
+          ? null
+          : "Error: Can not find non existing repo.",
+      data: response.status === 200 ? data : null,
+    };
+    return returnObj;
+  }
+
+  async updateRepo(repo, payload) {
+    const url = `${this.baseURL}/repos/${this.owner}/${repo}`;
+    const fetchObj = {
+      method: "PATCH",
+      headers: {
+        accept: "application/vnd.github+json",
+        Authorization: `Bearer ${this.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+      body: JSON.stringify(payload),
+    };
+    const response = await fetch(url, fetchObj);
+    const data = response.status === 200 ? await response.json() : null;
     const returnObj = {
       status: response.status,
       error:
