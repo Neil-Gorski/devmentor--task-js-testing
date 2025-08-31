@@ -21,8 +21,8 @@ export default class GitHubSDK {
         "X-GitHub-Api-Version": "2022-11-28",
       },
     };
-    const res = await fetch(url, fetchObj);
-    const data = await res.json();
+    const response = await fetch(url, fetchObj);
+    const data = await response.json();
     return data;
   }
 
@@ -34,13 +34,14 @@ export default class GitHubSDK {
         accept: "application/vnd.github+json",
         Authorization: `Bearer ${this.token}`,
         "X-GitHub-Api-Version": "2022-11-28",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     };
     const response = await fetch(url, fetchObj);
     const data = await response.json();
     console.log(response);
-    returnObj = {
+    const returnObj = {
       status: response.status,
       error:
         response.status === 201
@@ -63,7 +64,7 @@ export default class GitHubSDK {
     };
     const response = await fetch(url, fetchObj);
     console.log(response);
-    returnObj = {
+    const returnObj = {
       status: response.status,
       error:
         response.status === 204
@@ -72,6 +73,25 @@ export default class GitHubSDK {
       data: null,
     };
 
+    return returnObj;
+  }
+  async getRepo(repo) {
+    const url = `${this.baseURL}/repos/${this.owner}/${repo}`;
+    const fetchObj = {
+      method: "GET",
+      headers: {
+        accept: "application/vnd.github+json",
+        Authorization: `Bearer ${this.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    };
+    const response = await fetch(url, fetchObj);
+    const data = await response.json();
+    const returnObj = {
+      status: response.status,
+      error: response.status === 200 ? null : "Error: Can not find repo.",
+      data: data,
+    };
     return returnObj;
   }
 }

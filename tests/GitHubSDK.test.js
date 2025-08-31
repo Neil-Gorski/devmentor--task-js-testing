@@ -99,19 +99,19 @@ describe("GitHubSDK - CRUD repo", () => {
     expect(res.status).toBe(422);
     expect(res.error).toBe("Error: Repo with this name allready exists.");
   });
-  // test("find created repo", async () => {
-  //   const res = await gh.getRepo(payload.name);
-  //   expect(res.status).toBe(200);
-  //   expect(res.error).toBe(null);
-  //   expect(res.data).toEqual(
-  //     expect.objectContaining({
-  //       name: payload.name,
-  //       description: payload.description,
-  //       private: payload.private,
-  //       visibility: payload.visibility,
-  //     })
-  //   );
-  // });
+  test("find created repo", async () => {
+    const res = await gh.getRepo(payload.name);
+    expect(res.status).toBe(200);
+    expect(res.error).toBe(null);
+    expect(res.data).toEqual(
+      expect.objectContaining({
+        name: payload.name,
+        description: payload.description,
+        private: payload.private,
+        visibility: payload.visibility,
+      })
+    );
+  });
   // test("fails to find non existing repo", async () => {
   //   const res = await gh.getRepo(payload.name + "unknown");
   //   expect(res.status).toBe(404);
